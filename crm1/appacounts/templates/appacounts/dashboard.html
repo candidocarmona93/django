@@ -1,0 +1,63 @@
+{% extends 'appacounts/main.html' %}
+
+{% block content %}
+
+{% include 'appacounts/status.html' %}
+
+<div class="row">
+    <div class="col-md-5">
+        <h5>CUSTUMERS:</h5>
+        <hr>
+        <div class="card card-body">
+            <a href="http://" class="btb btn-primary btn-block btn-sm" href="">Create custumer</a>
+            <table class="table table-sm">
+                <tr>
+                    <th></th>
+                    <th>name</th>
+                    <th>phone</th>
+                </tr>
+
+                {% for custumer in custumers %}
+
+                     <tr>
+                         <td><a href="{% url 'custumer' custumer.id %}" class="btn-sm btn btn-info">view</a></td>
+                         <td>{{ custumer.name }}</td>
+                         <td>{{ custumer.phone }}</td>
+                     </tr>
+
+                 {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <h5>LAST 5 ORDERS:</h5>
+        <hr>
+        <div class="card card-body">
+            
+            <table class="table table-sm">
+                <tr>
+                    <td>product</td>
+                    <td>date order</td>
+                    <td>status</td>
+                    <td>update</td>
+                    <td>remove</td>
+                </tr>
+
+                {% for order in orderser %}
+                        <tr>
+                            <td>{{order.product}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>{{order.status}} </td>
+                            <td><a href="{% url 'update_order' order.id %}" class="btn-sm btn btn-info">update</a></td>
+                            <td><a href="{% url 'delete_order' order.id %}" class="btn-sm btn btn-danger">Delete</a></td>
+                        </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
